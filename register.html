@@ -19,15 +19,15 @@
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                 </ul>
-                <ng-container *ngIf="!authService.loggedIn(); else loggedIn">
+                <div id="visit">
                     <a class="btn btn-primary shadow m-xl-2" role="button" href="login.html">Iniciar sesión</a>
                     <a class="btn btn-primary shadow m-xl-2" role="button" href="register.html">Registrarse</a>
-                </ng-container>
-                <ng-template #loggedIn>
+                </div>
+                <div id="user" style="display: none;">
                     <!--<a class="btn btn-primary shadow m-xl-2" role="button" routerLink="/profile">Perfil</a>-->
                     <a class="btn btn-primary shadow m-xl-2" role="button" routerLink="/upload">Subir</a>
-                    <a class="btn btn-primary shadow m-xl-2" role="button" (click)="authService.logout()">Cerrar sesión</a>
-                </ng-template>
+                    <a class="btn btn-primary shadow m-xl-2" role="button" onclick="logOut()">Cerrar sesión</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -41,9 +41,9 @@
                         <div class="mb-3"><input class="form-control" type="text" name="username" id="u-username" placeholder="Usuario" required></div>
                         <div class="mb-3"><input class="form-control" type="text" name="fullname" id="u-fullname" placeholder="Nombre Completo" required></div>
                         <div class="mb-3"><input class="form-control" type="text" name="code" id="u-code" placeholder="Codigo Estudiante" required></div>
-                        <div class="mb-3"><input class="shadow-sm form-control" type="password" name="password" id="u-password" placeholder="Contraseña" required></div>
                         <div class="mb-3"><input class="shadow-sm form-control" type="email" name="email" id="u-email" placeholder="Email" required autofocus></div>
-                        <div class="mb-5"><button class="btn btn-primary shadow" type="submit" onclick="addUser()">¡Crear cuenta!</button></div>
+                        <div class="mb-3"><input class="shadow-sm form-control" type="password" name="password" id="u-password" placeholder="Contraseña" required></div>
+                        <div class="mb-5"><button class="btn btn-primary shadow" type="button" onclick="addUser()">¡Crear cuenta!</button></div>
                         <p class="text-muted">¿Ya tienes una cuenta? <a href="login.html">Inicia sesión&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-arrow-narrow-right">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                     <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -106,5 +106,6 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/startup-modern.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

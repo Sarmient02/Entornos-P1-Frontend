@@ -25,16 +25,15 @@
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                 </ul>
-                <ng-container *ngIf="!authService.loggedIn(); else loggedIn">
+                <div id="visit">
                     <a class="btn btn-primary shadow m-xl-2" role="button" href="login.html">Iniciar sesión</a>
                     <a class="btn btn-primary shadow m-xl-2" role="button" href="register.html">Registrarse</a>
-                </ng-container>
-                <ng-template #loggedIn>
+                </div>
+                <div id="user" style="display: none;">
                     <!--<a class="btn btn-primary shadow m-xl-2" role="button" routerLink="/profile">Perfil</a>-->
                     <a class="btn btn-primary shadow m-xl-2" role="button" routerLink="/upload">Subir</a>
-                    <a class="btn btn-primary shadow m-xl-2" role="button" (click)="authService.logout()">Cerrar
-                        sesión</a>
-                </ng-template>
+                    <a class="btn btn-primary shadow m-xl-2" role="button" onclick="logOut()">Cerrar sesión</a>
+                </div>
             </div>
         </div>
     </nav>
