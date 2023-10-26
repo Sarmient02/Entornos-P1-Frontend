@@ -10,24 +10,24 @@
 </head>
 <body>
     <nav class="navbar navbar-light navbar-expand-md fixed-top navbar-shrink py-3" id="mainNav">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span>UIStudy</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="/home.html"><span>UIStudy</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" routerLink="/home" routerLinkActive="active">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" routerLink="/documentos" routerLinkActive="active">Documentos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/home.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/home.html">Documentos</a></li>
                     <!--<li class="nav-item"><a class="nav-link" routerLink="/profile" routerLinkActive="active">Carreras</a></li>-->
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                 </ul>
-                <ng-container *ngIf="!authService.loggedIn(); else loggedIn">
-                    <a class="btn btn-primary shadow m-xl-2" role="button" routerLink="/login">Iniciar sesión</a>
-                    <a class="btn btn-primary shadow m-xl-2" role="button" routerLink="/register">Registrarse</a>
-                </ng-container>
-                <ng-template #loggedIn>
+                <div>
+                    <a class="btn btn-primary shadow m-xl-2" role="button" href="/login.html">Iniciar sesión</a>
+                    <a class="btn btn-primary shadow m-xl-2" role="button" href="/register.html">Registrarse</a>
+                </div>
+                <div>
                     <!--<a class="btn btn-primary shadow m-xl-2" role="button" routerLink="/profile">Perfil</a>-->
                     <a class="btn btn-primary shadow m-xl-2" role="button" routerLink="/upload">Subir</a>
                     <a class="btn btn-primary shadow m-xl-2" role="button" (click)="authService.logout()">Cerrar sesión</a>
-                </ng-template>
+                </div>
             </div>
         </div>
     </nav>
@@ -131,8 +131,8 @@
                 <div class="col-sm-4 col-md-3 text-lg-start d-flex flex-column">
                     <h3 class="fs-6 fw-bold">¡Sé parte de la comunidad!</h3>
                     <ul class="list-unstyled">
-                        <li><a href="#">Registrarse</a></li>
-                        <li><a href="#">Iniciar sesión</a></li>
+                        <li><a href="/register.html">Registrarse</a></li>
+                        <li><a href="/login.html">Iniciar sesión</a></li>
                         <li></li>
                     </ul>
                 </div>
