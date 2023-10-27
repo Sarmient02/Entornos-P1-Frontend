@@ -18,24 +18,42 @@ function sendRequest(endPoint, method, data) {
     return request
 }
 
+function getFriendlyRole(role) {
+    switch (role) {
+        case 'ROLE_USER':
+            return 'Usuario';
+        case 'ROLE_ADMIN':
+            return 'Administrador';
+        default:
+            return role;
+    }
+}
+
 function loadData(){
     let request = sendRequest('/api/user/all', 'GET', '')
+    
     let table = document.getElementById('users-table');
     table.innerHTML = "";
     request.onload = function(){
         let data = request.response;
         let json = JSON.parse(data);
+        localStorage.setItem("users", (data))
         json.forEach((element, index) => {
+            let friendlyRole = getFriendlyRole(element.role);
+            console.log(friendlyRole);
             table.innerHTML += `
                 <tr>
                     <th>${element.username}</th>
                     <td>${element.fullName}</td>
                     <td>${element.studentCode}</td>
                     <td>${element.email}</td>
-                    <td>
-                        <button type="button" class="btn btn-primary" onclick='window.location = 
-                        "form_users.html?id=${element.id}&username=${element.username}&fullName=${element.fullName}&studentCode=${element.studentCode}&email=${element.email}&role=${element.role}"'>Ver</button>
+                    <td>${friendlyRole}</td>
+                    <td style="display: flex; justify-content: space-evenly;">
+                        <button type="button" class="btn btn-info" style="display: flex; align-items: center; justify-content: center;" onclick='window.location = 
+                        "form_users.html?id=${element.id}"'><span class="material-symbols-outlined">edit</span></button>
+                        <button type="button" class="btn btn-danger" style="display: flex; align-items: center; justify-content: center;" onclick=deleteUserById(${(element.id)})><span class="material-symbols-outlined">delete</span></button>
                     </td>
+                    
                 </tr>
                 `
         });
@@ -107,6 +125,16 @@ function updateUser(){
     }
     request.onerror = function () {
         alert('Error al registrar usuario.')
+    }
+}
+
+function deleteUserById(id){
+    let request = sendRequest('/api/user/'+ id, 'DELETE', '')
+    request.onload = function(){
+        window.location = 'users.html';
+    }
+    request.onerror = function(){
+        alert('Error al guardar los cambios.')
     }
 }
 
