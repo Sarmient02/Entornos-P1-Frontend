@@ -43,6 +43,7 @@ function loadData(){
             console.log(friendlyRole);
             table.innerHTML += `
                 <tr>
+                    <th class="text-center">${element.id}</th>
                     <th>${element.username}</th>
                     <td>${element.fullName}</td>
                     <td>${element.studentCode}</td>
