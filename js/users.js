@@ -1,4 +1,10 @@
-const url = "http://localhost:8080"
+var API_URL;
+
+if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    API_URL = 'http://localhost:8080';
+} else {
+    API_URL = 'https://entornos-p1-backend.onrender.com';
+}
 
 document.addEventListener('DOMContentLoaded', function() {
     if (localStorage.getItem ("token")) {
@@ -11,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function sendRequest(endPoint, method, data) {
     let request = new XMLHttpRequest();
-    request.open(method, url + endPoint);
+    request.open(method, API_URL + endPoint);
     request.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem ("token"));
     request.setRequestHeader("Content-Type", "application/json");
     request.send(JSON.stringify(data));
@@ -30,11 +36,19 @@ function getFriendlyRole(role) {
 }
 
 function loadData(){
+    if(localStorage.getItem("token") == null || localStorage.getItem("token") == undefined){
+        window.location = 'login.html';
+        alert('No tiene permisos para acceder a esta página.')
+    }
     let request = sendRequest('/api/user/all', 'GET', '')
-    
+    loadUserInfo();
     let table = document.getElementById('users-table');
     table.innerHTML = "";
     request.onload = function(){
+        if (request.status == 403 || JSON.parse(sessionStorage.getItem("user")).role != 'ROLE_ADMIN') {
+            window.location = 'home.html';
+            alert('No tiene permisos para acceder a esta página.')
+        }
         let data = request.response;
         let json = JSON.parse(data);
         localStorage.setItem("users", (data))
@@ -65,6 +79,15 @@ function loadData(){
                 <td colspan="5">Error al recuperar los datos.</td>
             </tr>
         `;
+    }
+}
+
+function loadUserInfo(){
+    let request = sendRequest('/api/user/data', 'GET', '')
+    request.onload = function(){
+        let data = request.response;
+        let json = JSON.parse(data);
+        sessionStorage.setItem("user", (JSON.stringify(json)))
     }
 }
 

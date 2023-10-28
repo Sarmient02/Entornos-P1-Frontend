@@ -1,7 +1,14 @@
-const url = "http://localhost:8080"
+var API_URL;
+
+if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    API_URL = 'http://localhost:8080';
+} else {
+    API_URL = 'https://entornos-p1-backend.onrender.com';
+}
 
 document.addEventListener('DOMContentLoaded', function() {
-    if (localStorage.getItem ("token")) {
+    loadUserInfo();
+    if (localStorage.getItem("token") != null && localStorage.getItem("token") != undefined) {
         var visit = document.getElementById("visit");
         var user = document.getElementById("user");
         if (user.style.display === "none") {
@@ -13,8 +20,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function sendRequest(endPoint, method, data) {
     let request = new XMLHttpRequest();
-    request.open(method, url + endPoint);
+    request.open(method, API_URL + endPoint);
     request.setRequestHeader("Content-Type", "application/json");
+    if(localStorage.getItem("token") != null && localStorage.getItem("token") != undefined){
+        request.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem ("token"));
+    }
     request.send(JSON.stringify(data));
     return request
 }
@@ -63,12 +73,31 @@ function validarLogin() {
         localStorage.setItem("token", json.token);
         window.location = 'home.html';
     }
+
     request.onerror = function () {
         alert('Error al iniciar sesion.')
     }
 }
 
+function loadUserInfo(){
+    if(localStorage.getItem("token") != null && localStorage.getItem("token") != undefined && sessionStorage.getItem("user") == null){
+        console.log("xd")
+        let request = sendRequest('/api/user/data', 'GET', '')
+        request.onload = function(){
+            let data = request.response;
+            let json = JSON.parse(data);
+            sessionStorage.setItem("user", (JSON.stringify(json)))
+            console.log(sessionStorage.getItem("user").role)
+            var admin = document.getElementById("admin");
+            if (json.role != "ROLE_ADMIN") {
+                admin.style.display = "none";
+            }
+        }
+    }
+}
+
 function logOut() {
     localStorage.clear();
+    sessionStorage.clear();
     window.location = 'login.html';
 }
