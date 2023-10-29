@@ -6,15 +6,6 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
     API_URL = 'https://entornos-p1-backend.onrender.com';
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    if (localStorage.getItem ("token")) {
-        var visit = document.getElementById("visit");
-        var user = document.getElementById("user");
-        user.style.display = "block";
-        visit.style.display = "none";
-    }
-}, false);
-
 function sendRequest(endPoint, method, data) {
     let request = new XMLHttpRequest();
     request.open(method, API_URL + endPoint);
@@ -41,7 +32,7 @@ function loadData(){
         alert('No tiene permisos para acceder a esta página.')
     }
     let request = sendRequest('/api/user/all', 'GET', '')
-    loadUserInfo();
+    
     let table = document.getElementById('users-table');
     table.innerHTML = "";
     request.onload = function(){
@@ -79,15 +70,6 @@ function loadData(){
                 <td colspan="5">Error al recuperar los datos.</td>
             </tr>
         `;
-    }
-}
-
-function loadUserInfo(){
-    let request = sendRequest('/api/user/data', 'GET', '')
-    request.onload = function(){
-        let data = request.response;
-        let json = JSON.parse(data);
-        sessionStorage.setItem("user", (JSON.stringify(json)))
     }
 }
 

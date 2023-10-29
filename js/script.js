@@ -6,18 +6,6 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
     API_URL = 'https://entornos-p1-backend.onrender.com';
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    loadUserInfo();
-    if (localStorage.getItem("token") != null && localStorage.getItem("token") != undefined) {
-        var visit = document.getElementById("visit");
-        var user = document.getElementById("user");
-        if (user.style.display === "none") {
-            user.style.display = "block";
-            visit.style.display = "none";
-        }
-    }
-}, false);
-
 function sendRequest(endPoint, method, data) {
     let request = new XMLHttpRequest();
     request.open(method, API_URL + endPoint);
@@ -76,23 +64,6 @@ function validarLogin() {
 
     request.onerror = function () {
         alert('Error al iniciar sesion.')
-    }
-}
-
-function loadUserInfo(){
-    if(localStorage.getItem("token") != null && localStorage.getItem("token") != undefined && sessionStorage.getItem("user") == null){
-        console.log("xd")
-        let request = sendRequest('/api/user/data', 'GET', '')
-        request.onload = function(){
-            let data = request.response;
-            let json = JSON.parse(data);
-            sessionStorage.setItem("user", (JSON.stringify(json)))
-            console.log(sessionStorage.getItem("user").role)
-            var admin = document.getElementById("admin");
-            if (json.role != "ROLE_ADMIN") {
-                admin.style.display = "none";
-            }
-        }
     }
 }
 
