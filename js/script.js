@@ -42,6 +42,19 @@ function addUser() {
     }
 }
 
+function addPost() {
+    let url = document.getElementById('p-url').value
+    let title = document.getElementById('p-title').value
+    let description = document.getElementById('p-description').value
+    let userId = JSON.parse(sessionStorage.getItem("user")).id
+    let data = {
+        'url': url, 'title': title, 'description': description, 'userId': userId
+    }
+
+    console.log(data)
+   
+}
+
 function validarLogin() {
     var username = document.getElementById('username').value
     var password = document.getElementById('password').value
