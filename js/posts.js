@@ -52,7 +52,7 @@ function loadData() {
                     <td>${element.createdAt}</td>
                     <td>${element.username}</td>
                     <td style="display: flex; justify-content: space-evenly;">
-                        <button type="button" class="btn btn-success" style="display: flex; align-items: center; justify-content: center;"><span class="material-symbols-outlined"><a style="color: inherit;" href="${(element.accessUrl)}">download</a></span></button>
+                        <a type="button" target='_blank' href="${(element.accessUrl)}" class="btn btn-success" style="display: flex; align-items: center; justify-content: center;"><span class="material-symbols-outlined">download</span></a>
                         <button type="button" class="btn btn-info" style="display: flex; align-items: center; justify-content: center;" onclick='window.location = 
                         "form_posts.html?id=${element.id}"'><span class="material-symbols-outlined">edit</span></button>
                         <button type="button" class="btn btn-danger" style="display: flex; align-items: center; justify-content: center;" onclick=deletePostById(${(element.id)},${(element.userId)})><span class="material-symbols-outlined">delete</span></button>
