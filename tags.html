@@ -25,13 +25,13 @@
                         <i class="fas fa-tachometer-alt fa-fw material-symbols-outlined">manage_accounts</i>
                         <span class="d-none d-lg-inline-block">Usuarios</span>
                     </a>
-                    <a href="#"
-                        class="list-group-item list-group-item-action py-2 ripple d-flex align-items-center justify-content-evenly active">
-                        <i class="fas fa-tachometer-alt fa-fw material-symbols-outlined">article</i>
+                    <a href="posts.html"
+                        class="list-group-item list-group-item-action py-2 ripple d-flex align-items-center justify-content-evenly">
+                        <i class="fas fa-tachometer-alt fa-fw material-symbols-outlined">edit</i>
                         <span class="d-none d-lg-inline-block">Publicaciones</span>
                     </a>
-                    <a href="tags.html"
-                        class="list-group-item list-group-item-action py-2 ripple d-flex align-items-center justify-content-evenly">
+                    <a href="#"
+                        class="list-group-item list-group-item-action py-2 ripple d-flex align-items-center justify-content-evenly active">
                         <i class="fas fa-tachometer-alt fa-fw material-symbols-outlined">tag</i>
                         <span class="d-none d-lg-inline-block">Etiquetas</span>
                     </a>
@@ -71,10 +71,10 @@
     <div class="admin-container pt-5">
         <section class="container-xxl">
             <div class="d-flex align-items-center mb-4 flex-sm-row">
-                <h3 class="fw-bold w-auto m-0 p-0">Administración de Publicaciones</h3>
+                <h3 class="fw-bold w-auto m-0 p-0">Administración de Etiquetas</h3>
                 <button class="btn btn-primary w-auto  ms-auto d-flex align-items-center"
-                    onclick="window.location='form_n_post.html'">
-                    <span class="material-symbols-outlined me-2">post_add</span>Nueva Publicacion
+                    onclick="window.location='form_n_tag.html'">
+                    <span class="material-symbols-outlined me-2">tag</span>Nueva Etiqueta
                 </button>
             </div>
             <div class="divider"></div>
@@ -83,14 +83,10 @@
                     <thead>
                         <tr class="table-bordered">
                             <th class="text-center" scope="col">ID</th>
-                            <th class="text-center" scope="col">Titulo</th>
-                            <th class="text-center" scope="col">Descripcion</th>
-                            <th class="text-center" scope="col">Fecha Publicacion</th>
-                            <th class="text-center" scope="col">Usuario</th>
-                            <th class="text-center" scope="col">Acciones</th>
+                            <th class="text-center" scope="col">Nombre</th>
                         </tr>
                     </thead>
-                    <tbody id="posts-table">
+                    <tbody id="tags-table">
                     </tbody>
                 </table>
             </div>
@@ -100,7 +96,7 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
     <script src="./js/verify-role.js"></script>
-    <script src="./js/posts.js"></script>
+    <script src="./js/tags.js"></script>
     <script>
         window.onload = function () {
             loadData();

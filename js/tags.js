@@ -31,9 +31,9 @@ function loadData() {
         window.location = 'login.html';
         alert('No tiene permisos para acceder a esta página.')
     }
-    let request = sendRequest('/api/post/all', 'GET', '')
+    let request = sendRequest('/api/tag/all', 'GET', '')
 
-    let table = document.getElementById('posts-table');
+    let table = document.getElementById('tags-table');
     table.innerHTML = "";
     request.onload = function () {
         if (request.status == 403 || JSON.parse(sessionStorage.getItem("user")).role != 'ROLE_ADMIN') {
@@ -42,20 +42,16 @@ function loadData() {
         }
         let data = request.response;
         let json = JSON.parse(data);
-        localStorage.setItem("posts", (data))
+        localStorage.setItem("tags", (data))
         json.forEach((element, index) => {
             table.innerHTML += `
                 <tr>
                     <th class="text-center">${element.id}</th>
-                    <th>${element.title}</th>
-                    <td>${element.description}</td>
-                    <td>${element.createdAt}</td>
-                    <td>${element.username}</td>
+                    <th>${element.name}</th>
                     <td style="display: flex; justify-content: space-evenly;">
-                        <a type="button" target='_blank' href="${(element.accessUrl)}" class="btn btn-success" style="display: flex; align-items: center; justify-content: center;"><span class="material-symbols-outlined">download</span></a>
                         <button type="button" class="btn btn-info" style="display: flex; align-items: center; justify-content: center;" onclick='window.location = 
-                        "form_posts.html?id=${element.id}"'><span class="material-symbols-outlined">edit</span></button>
-                        <button type="button" class="btn btn-danger" style="display: flex; align-items: center; justify-content: center;" onclick=deletePostById(${(element.id)},${(element.userId)})><span class="material-symbols-outlined">delete</span></button>
+                        "form_tags.html?id=${element.id}"'><span class="material-symbols-outlined">edit</span></button>
+                        <button type="button" class="btn btn-danger" style="display: flex; align-items: center; justify-content: center;" onclick=deleteTagById(${(element.id)},${(element.userId)})><span class="material-symbols-outlined">delete</span></button>
                     </td>
                     
                 </tr>
@@ -71,51 +67,44 @@ function loadData() {
     }
 }
 
-function savePost() {
-    let accessUrl = document.getElementById('p-accessUrl').value
-    let title = document.getElementById('p-title').value
-    let description = document.getElementById('p-description').value
-    let userId = JSON.parse(sessionStorage.getItem("user")).id
+function saveTag() {
+    let name = document.getElementById('t-name').value
     let data = {
-        'accessUrl': accessUrl, 'title': title, 'description': description, 'userId': userId, 'subjectId': 1
+        'name': name
     }
 
-    let request = sendRequest('/api/post', 'POST', data)
+    let request = sendRequest('/api/tag/new', 'POST', data)
 
     request.onload = function () {
-        window.location = 'posts.html';
+        window.location = 'tags.html';
     }
     request.onerror = function () {
-        alert('Error al crear publicacion.')
+        alert('Error al crear etiqueta.')
     }
 }
 
-function updatePost() {
+function updateTag() {
     let id = document.getElementById('id').value
-    let userId= document.getElementById('userId').value
-    let title = document.getElementById('title').value
-    let description = document.getElementById('description').value
-    let accessUrl = document.getElementById('accessUrl').value
-    let date = new Date();
+    let name = document.getElementById('name').value
 
     let data = {
-        'id': id, 'userId': userId, 'title':title, 'description':description, 'accessUrl':accessUrl, "subjectId": 1, "createdAt": date
+        'id': id, 'name': name
     }
 
-    let request = sendRequest('/api/post', 'PUT', data)
+    let request = sendRequest('/api/tag/edit', 'PUT', data)
 
     request.onload = function () {
-        window.location = 'posts.html';
+        window.location = 'tags.html';
     }
     request.onerror = function () {
-        alert('Error al registrar publicacion.')
+        alert('Error al registrar etiqueta.')
     }
 }
 
-function deletePostById(id, userId) {
-    let request = sendRequest('/api/post?id='+id+'&userId='+userId, 'DELETE', '')
+function deleteTagById(id) {
+    let request = sendRequest('/api/tag?tagId='+id, 'DELETE', '')
     request.onload = function () {
-        window.location = 'posts.html';
+        window.location = 'tags.html';
     }
     request.onerror = function () {
         alert('Error al guardar los cambios.')
