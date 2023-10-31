@@ -43,15 +43,22 @@ function addUser() {
 }
 
 function addPost() {
-    let url = document.getElementById('p-url').value
+    let accessUrl = document.getElementById('p-accessUrl').value
     let title = document.getElementById('p-title').value
     let description = document.getElementById('p-description').value
     let userId = JSON.parse(sessionStorage.getItem("user")).id
     let data = {
-        'url': url, 'title': title, 'description': description, 'userId': userId
+        'accessUrl': accessUrl, 'title': title, 'description': description, 'userId': userId, 'subjectId': 1
     }
 
-    console.log(data)
+    let request = sendRequest('/api/post', 'POST', data)
+
+    request.onload = function () {
+        window.location = 'home.html';
+    }
+    request.onerror = function () {
+        alert('Error al crear publicacion.')
+    }
    
 }
 

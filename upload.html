@@ -49,10 +49,20 @@
                 <div class="col-md-6">
                     <div>
                         <form onsubmit="" method="POST">
-                            <div class="mb-3"><input class="shadow-sm form-control" type="url" name="url" id="p-url" placeholder="Enlace Documento" required autofocus></div>
-                            <div class="mb-3"><input class="shadow-sm form-control" type="text" name="title" id="p-title" placeholder="Titulo" required></div>
-                            <div class="mb-3"><input class="shadow-sm form-control" type="text" name="description" id="p-description" placeholder="Descripcion" required></div>
-                            <div class="mb-5"><button class="btn btn-primary shadow d-block w-100" type="button" onclick="addPost()">Enviar</button></div>
+                            <div class="mb-3"><input class="shadow-sm form-control" type="url" name="accessUrl"
+                                    id="p-accessUrl" placeholder="Enlace Documento" required autofocus></div>
+                            <div class="mb-3"><input class="shadow-sm form-control" type="text" name="title"
+                                    id="p-title" placeholder="Titulo" required></div>
+                            <div class="mb-3"><input class="shadow-sm form-control" type="text" name="description"
+                                    id="p-description" placeholder="Descripcion" required></div>
+                            <div class="mb-3"><select class="shadow-sm form-select" name="p_subject" id="p_subjectId">
+                                <option>Calculo I</option>
+                                <option>Fisica I</option>
+                                <option>Ingles I</option>
+                                <option>Quimica I</option>
+                            </select></div>
+                            <div class="mb-5"><button class="btn btn-primary shadow d-block w-100" type="button"
+                                    onclick="addPost()">Enviar</button></div>
                         </form>
                     </div>
                 </div>
@@ -123,7 +133,7 @@
     <script src="./js/verify-role.js"></script>
     <script>
         let div = document.getElementById('title');
-            div.innerHTML += `
+        div.innerHTML += `
                         <h2 class="display-6 fw-bold mb-4">¡Hola, ${JSON.parse(sessionStorage.getItem("user")).username}!</h2>
                         <p class="text-muted">¿Quieres subir un documento?</p>
                 `

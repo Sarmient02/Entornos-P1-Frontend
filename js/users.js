@@ -73,22 +73,6 @@ function loadData(){
     }
 }
 
-function loadUser(id,username,fullName,studentCode,email,role) {
-    let f_id = document.getElementById('id')
-    let f_username = document.getElementById('username')
-    let f_fullName = document.getElementById('fullName')
-    let f_studentCode = document.getElementById('studentCode')
-    let f_email = document.getElementById('email')
-    let f_role = document.getElementById('role')
-        
-	f_id.value = id
-    f_username.value = username
-    f_fullName.value = fullName
-    f_studentCode.value = studentCode
-    f_email.value = email
-    f_role.value = role
-}
-
 function saveUser(){
     let username = document.getElementById('username').value
     let fullName = document.getElementById('fullName').value
