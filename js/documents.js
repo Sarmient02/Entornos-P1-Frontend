@@ -50,7 +50,8 @@ function loadData() {
                             <div>
                                 <h6 class="fw-bold text-muted">${(element.title)}</h6>
                                 <p>${(element.description)}</p>
-                            </div><a class="btn btn-primary" role="button" href="${(element.accessUrl)}">Descargar</a>
+                            </div>
+                            <a class="btn btn-primary" target='_blank' href="${(element.accessUrl)}">Descargar</a>
                         </div>
                     </div>
             </div>
@@ -90,7 +91,8 @@ function searchDocumentos(){
                             <div>
                                 <h6 class="fw-bold text-muted">${(element.title)}</h6>
                                 <p>${(element.description)}</p>
-                            </div><a class="btn btn-primary" role="button" href="${(element.accessUrl)}">Descargar</a>
+                            </div>
+                            <a class="btn btn-primary" target='_blank' href="${(element.accessUrl)}">Descargar</a>
                         </div>
                     </div>
             </div>
